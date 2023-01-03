@@ -1,0 +1,75 @@
+def click(event):
+    global scrval
+    t =  event.widget.cget("text")
+    print(t)
+    if t=="=":
+        if scrval.get().isdigit():
+            val = int(scrval.get())
+        else:
+            try:
+                val = eval(scrval.get())
+            except:
+                val = "Error"
+        scrval.set(val)
+        screen.update
+    elif t=="C":
+        scrval.set("")
+        screen.update()
+    else:
+        scrval.set(scrval.get()+t)
+        screen.update()
+def buttons(m,n):
+    f1 = Frame(a,bg="cyan")
+    for i in range(m,n,-1):
+        b = Button(f1,text=f"{i}",font="lucida 30 bold", borderwidth=3,padx=10,pady=1)
+        b.pack(side=RIGHT,padx=23,pady=1)
+        b.bind("<Button-1>",click)
+    f1.pack(fill=X)
+from tkinter import *
+a = Tk()
+a.title("Calculator By Syed Maaz")
+a.geometry("400x600+450+50")
+a.maxsize(400,600)
+a.minsize(400,600)
+a.wm_iconbitmap("cal.ico")
+scrval = StringVar()
+scrval.set("")
+screen= Entry(a,textvar=scrval,font="lucida 35 bold")
+screen.pack(fill = X,ipadx =20, padx=15,pady =20)
+buttons(9,6)
+buttons(6,3)
+buttons(3,0)
+f1 = Frame(a,bg="cyan")
+b = Button(f1,text=".",font="lucida 30 bold", borderwidth=3,padx=15,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+b = Button(f1,text="0",font="lucida 30 bold", borderwidth=3,padx=10,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+b = Button(f1,text="+",font="lucida 30 bold", borderwidth=3,padx=10,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+f1.pack(fill=X)
+f1 = Frame(a,bg="cyan")
+b = Button(f1,text="-",font="lucida 30 bold", borderwidth=3,padx=14,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+b = Button(f1,text="*",font="lucida 29 bold", borderwidth=3,padx=13,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+b = Button(f1,text="/",font="lucida 30 bold", borderwidth=3,padx=16,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+f1.pack(fill=X)
+f1 = Frame(a,bg="cyan")
+b = Button(f1,text="=",font="lucida 30 bold", borderwidth=3,padx=9,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+b = Button(f1,text="C",font="lucida 30 bold", borderwidth=3,padx=6,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+b = Button(f1,text="%",font="lucida 31 bold", borderwidth=3,padx=4,pady=1)
+b.pack(side=RIGHT,padx=23,pady=1)
+b.bind("<Button-1>",click)
+f1.pack(fill=X)
+a.mainloop()
